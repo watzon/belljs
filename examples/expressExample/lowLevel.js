@@ -47,7 +47,7 @@ const client = new TelegramClient(
   new StoreSession("session_name"),
   API_ID,
   API_HASH,
-  {}
+  {},
 );
 let phone;
 let phoneCodeHash; // needed for sign in
@@ -75,7 +75,7 @@ app.post("/", async (req, res) => {
         apiId: API_ID,
         apiHash: API_HASH,
       },
-      phone
+      phone,
     );
     phoneCodeHash = result.phoneCodeHash;
     return res.send(BASE_TEMPLATE.replace("{{0}}", CODE_FORM));
@@ -88,7 +88,7 @@ app.post("/", async (req, res) => {
           phoneNumber: phone,
           phoneCodeHash,
           phoneCode: req.body.code,
-        })
+        }),
       );
     } catch (err) {
       if (err.errorMessage === "SESSION_PASSWORD_NEEDED") {
@@ -107,7 +107,7 @@ app.post("/", async (req, res) => {
         onError: (err) => {
           throw err;
         },
-      }
+      },
     );
   }
   res.redirect("/");
@@ -116,11 +116,13 @@ app.post("/", async (req, res) => {
 function formatMessage(message) {
   let content = (message.text || "(action message or media)").replace(
     "\n",
-    "<br>"
+    "<br>",
   );
-  return `<p><strong>${utils.getDisplayName(
-    message.sender
-  )}</strong>: ${content}<sub>${message.date}</sub></p>`;
+  return `<p><strong>${
+    utils.getDisplayName(
+      message.sender,
+    )
+  }</strong>: ${content}<sub>${message.date}</sub></p>`;
 }
 
 // callbacks for code and password also

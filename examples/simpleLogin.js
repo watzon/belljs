@@ -70,11 +70,11 @@ client
     console.log("%c you should now be connected", "color:#B54128");
     console.log(
       "%c your string session is " + client.session.save(),
-      "color:#B54128"
+      "color:#B54128",
     );
     console.log(
       "%c you can save it to login with it next time",
-      "color:#B54128"
+      "color:#B54128",
     );
   })
   .catch((e) => {

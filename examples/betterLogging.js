@@ -1,7 +1,7 @@
 rewireLoggingToElement(
   () => document.getElementById("log"),
   () => document.getElementById("log-container"),
-  true
+  true,
 );
 
 function rewireLoggingToElement(eleLocator, eleOverflowLocator, autoScroll) {
@@ -17,11 +17,11 @@ function rewireLoggingToElement(eleLocator, eleOverflowLocator, autoScroll) {
         const eleContainerLog = eleOverflowLocator();
         const isScrolledToBottom =
           eleContainerLog.scrollHeight - eleContainerLog.clientHeight <=
-          eleContainerLog.scrollTop + 1;
+            eleContainerLog.scrollTop + 1;
         eleLog.innerHTML += output + "<br>";
         if (isScrolledToBottom) {
-          eleContainerLog.scrollTop =
-            eleContainerLog.scrollHeight - eleContainerLog.clientHeight;
+          eleContainerLog.scrollTop = eleContainerLog.scrollHeight -
+            eleContainerLog.clientHeight;
         }
       } else {
         eleLog.innerHTML += output + "<br>";

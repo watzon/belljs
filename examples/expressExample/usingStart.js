@@ -47,7 +47,7 @@ const client = new TelegramClient(
   new StoreSession("session_name"),
   API_ID,
   API_HASH,
-  {}
+  {},
 );
 let phone;
 
@@ -113,11 +113,13 @@ function callbackPromise() {
 function formatMessage(message) {
   let content = (message.text || "(action message or media)").replace(
     "\n",
-    "<br>"
+    "<br>",
   );
-  return `<p><strong>${utils.getDisplayName(
-    message.sender
-  )}</strong>: ${content}<sub>${message.date}</sub></p>`;
+  return `<p><strong>${
+    utils.getDisplayName(
+      message.sender,
+    )
+  }</strong>: ${content}<sub>${message.date}</sub></p>`;
 }
 
 const phoneCallback = callbackPromise();

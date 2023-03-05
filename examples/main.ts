@@ -1,16 +1,16 @@
-import { Logger } from "telegram/extensions";
-import { TelegramClient } from "telegram";
-import { StringSession } from "telegram/sessions";
-import { NewMessage } from "telegram/events";
-import { NewMessageEvent } from "telegram/events/NewMessage";
-import { Message } from "telegram/tl/custom/message";
+import { Logger } from "../src/extensions/mod.ts";
+import { TelegramClient } from "../src/mod.ts";
+import { StringSession } from "../src/sessions/mod.ts";
+import { NewMessage } from "../src/events/mod.ts";
+import { NewMessageEvent } from "../src/events/NewMessage.ts";
+import { CustomMessage } from "../src/tl/custom/message.ts";
 
-const apiId = 0;
+const apiId = 12345;
 const apiHash = "";
 const stringSession = "";
 
 async function eventPrint(event: NewMessageEvent) {
-  const message = event.message as Message;
+  const message = event.message as CustomMessage;
 
   // Checks if it's a private message (from user or bot)
   if (event.isPrivate) {
@@ -20,7 +20,7 @@ async function eventPrint(event: NewMessageEvent) {
     if (message.text == "hello") {
       const sender = await message.getSender();
       console.log("sender is", sender);
-      await client.sendMessage(sender, {
+      await client.sendMessage(sender!, {
         message: `hi your id is ${message.senderId}`,
       });
     }
@@ -30,7 +30,7 @@ const client = new TelegramClient(
   new StringSession(stringSession),
   apiId,
   apiHash,
-  { connectionRetries: 5 }
+  { connectionRetries: 5 },
 );
 
 (async () => {

@@ -24,8 +24,8 @@ function setState(event, state) {
 
 function setData(event, name, value) {
   // stores a value in storage
-  const key =
-    event.chatId.toString() + ":" + (event.senderId || "Admin").toString();
+  const key = event.chatId.toString() + ":" +
+    (event.senderId || "Admin").toString();
   if (!(key in storage)) {
     storage[key] = {};
   }
@@ -33,8 +33,8 @@ function setData(event, name, value) {
 }
 
 function getData(event, name) {
-  const key =
-    event.chatId.toString() + ":" + (event.senderId || "Admin").toString();
+  const key = event.chatId.toString() + ":" +
+    (event.senderId || "Admin").toString();
   if (!(key in storage)) {
     return undefined;
   }
@@ -49,7 +49,7 @@ function getData(event, name) {
     API_HASH,
     {
       connectionRetries: 5,
-    }
+    },
   );
 
   await client.start({
